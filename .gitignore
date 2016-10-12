@@ -3,3 +3,4 @@ venv
 staticfiles
 environment.sh
 .idea*
+env/
