@@ -1,0 +1,10 @@
+[
+  {
+    "model": "polls.TiposDeServicio",
+    "pk": 1,
+    "fields": {
+      "nombre" : "Desarrollador Web",
+      "imagen" : "Imagen"
+    }
+  }
+]

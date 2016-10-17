@@ -4,3 +4,5 @@ staticfiles
 environment.sh
 .idea*
 env/
+photos/
+db.sqlite3
