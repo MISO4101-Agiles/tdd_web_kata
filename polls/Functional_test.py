@@ -45,3 +45,22 @@ class FunctionalTest(TestCase):
         span = self.browser.find_element(By.XPATH, '//span[text()="Gloria Cortez"]')
 
         self.assertIn("Gloria Cortez", span.text)
+
+    def test_detalle(self):
+        self.browser.get('http://localhost:8000')
+        span = self.browser.find_element_by_xpath('//span[text()="Gloria Cortez"]')
+        span.click()
+
+        self.browser.implicitly_wait(2)
+
+        h2 = self.browser.find_element_by_xpath('//h2[text()="Gloria Cortez"]')
+        self.assertIn('Gloria Cortez', h2.text)
+
+        experiencia = self.browser.find_element_by_xpath('//h4[contains(text(),"5 años")]')
+        self.assertIn('5 años', experiencia.text)
+
+        telefono = self.browser.find_element_by_xpath('//h4[contains(text(),"3173024578")]')
+        self.assertIn('3173024578', telefono.text)
+
+        correo = self.browser.find_element_by_xpath('//h4[contains(text(),"correo@hotmail.com")]')
+        self.assertIn('correo@hotmail.com', correo.text)
