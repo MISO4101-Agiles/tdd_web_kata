@@ -1,5 +1,9 @@
 from unittest import TestCase
+
+from pip._vendor.distlib.compat import raw_input
 from selenium import webdriver
+from datetime import datetime
+from selenium.webdriver.common.by import By
 import os
 
 
@@ -73,3 +77,23 @@ class FunctionalTest(TestCase):
         self.browser.implicitly_wait(5)
         self.assertText('//a[contains(text()," Logout")]', "Logout")
 
+    def test_comentario(self):
+        self.browser.get('http://localhost:8000')
+        link = self.browser.find_element_by_link_text('Gloria Cortez')
+        link.click()
+
+        self.browser.implicitly_wait(5)
+        correo = self.browser.find_element_by_id('correo')
+        correo.send_keys('correocomentario@gmail.com')
+
+        comentario = self.browser.find_element_by_id('comentario')
+        texto_comentario = 'Soy un comentario '
+        comentario.send_keys(texto_comentario)
+        boton_grabar = self.browser.find_element_by_xpath('//form[1]/button[1]')
+        boton_grabar.click()
+
+        h4 = self.browser.find_element_by_xpath('//h4[text()="correocomentario@gmail.com"]')
+        self.assertIn('correocomentario@gmail.com', h4.text)
+
+        p = self.browser.find_element_by_xpath('//p[text()="%s"]' % texto_comentario)
+        self.assertIn(texto_comentario, p.text)
