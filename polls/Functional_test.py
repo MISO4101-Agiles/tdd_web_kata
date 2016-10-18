@@ -35,7 +35,7 @@ class FunctionalTest(TestCase):
         self.set_click('id_register')
         self.browser.implicitly_wait(2)
         self.set_text('id_nombre', 'Gloria')
-        self.set_text('id_apellidos', 'Cortez')
+        self.set_text('id_apellidos', 'Cortes')
         self.set_text('id_aniosExperiencia', '5')
         tipo_servicio = "//select[@id='id_tiposDeServicio']/option[text()='Desarrollador Web']"
         self.browser.find_element_by_xpath(tipo_servicio).click()
@@ -46,12 +46,12 @@ class FunctionalTest(TestCase):
         self.set_text('id_password', 'clave123')
         self.set_click('id_grabar')
         self.browser.implicitly_wait(3)
-        self.assertText('//span[text()="Gloria Cortez"]', "Gloria Cortez")
+        self.assertText('//span[text()="Gloria Cortes"]', "Gloria Cortes")
 
     def test_detalle(self):
-        self.browser.find_element_by_xpath('//span[text()="Gloria Cortez"]').click()
+        self.browser.find_element_by_xpath('//span[text()="Gloria Cortes"]').click()
         self.browser.implicitly_wait(2)
-        self.assertText('//h2[text()="Gloria Cortez"]', 'Gloria Cortez')
+        self.assertText('//h2[text()="Gloria Cortes"]', 'Gloria Cortes')
         self.assertText('//h4[contains(text(),"5 años")]', '5 años')
         self.assertText('//h4[contains(text(),"3173024578")]', '3173024578')
         self.assertText('//h4[contains(text(),"correo@hotmail.com")]', 'correo@hotmail.com')
@@ -79,7 +79,7 @@ class FunctionalTest(TestCase):
 
     def test_comentario(self):
         self.browser.get('http://localhost:8000')
-        link = self.browser.find_element_by_link_text('Gloria Cortez')
+        link = self.browser.find_element_by_link_text('Gloria Cortes')
         link.click()
 
         self.browser.implicitly_wait(5)

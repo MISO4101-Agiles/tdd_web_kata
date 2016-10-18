@@ -12,7 +12,6 @@
     <script src="/designMatch/recursos/jquery.bootpag.min.js"></script>
     <script>
         var trabajador = localStorage.getItem('trabajador');
-
         (function () {
             $.getJSON("/trabajador/" + trabajador).done(function (data) {
                 $.each(data, function (key, val) {
@@ -25,12 +24,10 @@
                 })
             });
         })();
-
         mostrarComentarios();
         function mostrarComentarios(){
             $.getJSON("/mostrarComentarios/" + trabajador).done(function (data) {
                 $.each(data, function (key, val) {
-
                     var div='<div style="box-shadow: 2px 2px 5px gray; border-radius: 5px" class="col-md-6 col-md-offset-3">'+
                                   '<h4>'+val.fields.correo+'</h4>'+
                                   '<p>'+val.fields.texto+'</p></div>';
@@ -38,13 +35,21 @@
                 })
             });
         }
-
-
         function agregarComentario(){
-            $.post( "/addComment", { texto: $('#comentario').val(), trabajador: trabajador, correo: $('#correo').val() })
-              .done(function( data ) {
-                  mostrarComentarios();
-              });
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/addComment',
+                dataType: "json",
+                data:  JSON.stringify({texto: $('#comentario').val(), trabajador: trabajador, correo: $('#correo').val() }),
+                contentType: "application/json; charset=utf-8",
+                success: function (msg)
+                        {
+                            mostrarComentarios();
+                        },
+                error: function (err)
+                { alert(err.responseText);}
+            });
         }
     </script>
 </head>
