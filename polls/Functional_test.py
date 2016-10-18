@@ -50,3 +50,12 @@ class FunctionalTest(TestCase):
         self.assertText('//h4[contains(text(),"5 años")]', '5 años')
         self.assertText('//h4[contains(text(),"3173024578")]', '3173024578')
         self.assertText('//h4[contains(text(),"correo@hotmail.com")]', 'correo@hotmail.com')
+
+    def test_login(self):
+        self.set_click('id_login')
+        self.browser.implicitly_wait(3)
+        self.set_text('login-username', 'gcortes')
+        self.set_text('login-password', 'clave123')
+        self.set_click('id_entrar')
+        self.assertText('//a[contains(text()," Logout")]', "Logout")
+
