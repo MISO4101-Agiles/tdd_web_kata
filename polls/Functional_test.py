@@ -6,6 +6,7 @@ import os
 class FunctionalTest(TestCase):
     def set_text(self, key, string):
         nombre = self.browser.find_element_by_id(key)
+        nombre.clear()
         nombre.send_keys(string)
 
     def set_click(self, key):
@@ -57,5 +58,18 @@ class FunctionalTest(TestCase):
         self.set_text('login-username', 'gcortes')
         self.set_text('login-password', 'clave123')
         self.set_click('id_entrar')
+        self.assertText('//a[contains(text()," Logout")]', "Logout")
+
+    def test_editar_perfil(self):
+        self.test_login()
+        self.browser.implicitly_wait(3)
+        self.set_click('id_editar')
+        self.browser.implicitly_wait(3)
+        self.set_text('id_aniosExperiencia', '7')
+        self.set_text('id_telefono', '43214143')
+        self.set_text('id_correo', 'otrocorreo@hotmail.com')
+        self.set_text('id_imagen', os.path.join(os.getcwd(), 'test_resources', 'piton2.jpg'))
+        self.set_click('id_grabar')
+        self.browser.implicitly_wait(5)
         self.assertText('//a[contains(text()," Logout")]', "Logout")
 
